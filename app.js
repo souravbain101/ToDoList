@@ -4,9 +4,7 @@ const popup = require('node-popup');
 
 
 const app = express();
-let items = ["Buy Food",
-    "Cook Food",
-    "Eat Food"];
+let items = [];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -29,10 +27,19 @@ app.get("/", function (req, res) {
 
 app.post("/", function (req, res) {
     let item = req.body.text;
-    if (item!="") {
+    if (item==="pop"||item==="Pop"||item==="POP") {
+        items.pop();
+       
+    }
+    else if (item==="Clean"||item==="clean"||item==="CLEAN") {
+        items=[];
+    }
+    else  {
         items.push(item);
        
     }
+    
+    
    
    
     res.redirect("/");
